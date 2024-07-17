@@ -1,6 +1,7 @@
 ﻿using EmployeeManagementSystem.Contracts;
 using EmployeeManagementSystem.Model;
 using EmployeeManagementSystem.Model.Response;
+using EmployeeManagementSystem.Model.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagementSystem.Controllers
@@ -33,7 +34,11 @@ namespace EmployeeManagementSystem.Controllers
         [HttpGet]
         public async Task<ActionResult<EmployeeAllResponse>> GetEmployees([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            var result = await _employeeRepository.GetAllAsync(page, pageSize).ConfigureAwait(false);           
+            var result = await _employeeRepository.GetAllAsync(page, pageSize).ConfigureAwait(false);
+            if (result.TotalCount == 0) 
+            {
+                return NotFound();
+            }
             return Ok(result);
         }
 
@@ -62,7 +67,7 @@ namespace EmployeeManagementSystem.Controllers
         /// <returns>HttpStatusCode</returns>
 
         [HttpPost]
-        public async Task<ActionResult<bool>> PostEmployee(Employee employee)
+        public async Task<ActionResult<bool>> PostEmployee(EmployeeRequest employee)
         {
             var result = await _employeeRepository.AddAsync(employee).ConfigureAwait(false);
             if (result)

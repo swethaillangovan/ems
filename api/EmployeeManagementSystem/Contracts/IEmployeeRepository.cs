@@ -1,5 +1,6 @@
 ﻿using EmployeeManagementSystem.Model;
 using EmployeeManagementSystem.Model.Response;
+using EmployeeManagementSystem.Model.Request;
 
 namespace EmployeeManagementSystem.Contracts
 {
@@ -26,7 +27,7 @@ namespace EmployeeManagementSystem.Contracts
         /// </summary>
         /// <param name="employee"></param>
         /// <returns>Boolean indicates the staus of the operation</returns>
-        Task<bool> AddAsync(Employee employee);
+        Task<bool> AddAsync(EmployeeRequest employee);
 
         /// <summary>
         /// Update employee data
