@@ -6,3 +6,5 @@
 /api/EmployeeManagementSystem/bin/Debug/net6.0
 /api/EmployeeManagementSystem/obj
 /api/EmployeeManagementSystem/EmployeeManagementSystem.csproj.user
+/api/EmployeeManagementSystem.Test/bin/Debug/net6.0
+/api/EmployeeManagementSystem.Test/obj
