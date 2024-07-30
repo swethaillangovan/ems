@@ -42,5 +42,7 @@ namespace EmployeeManagementSystem.Contracts
         /// <param name="id"></param>
         /// <returns>Boolean indicates the staus of the operation</returns>
         Task<bool> DeleteAsync(int id);
+
+        Task<EmployeeAllResponse> GetBySearchText(string text);
     }
 }

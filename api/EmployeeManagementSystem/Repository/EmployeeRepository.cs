@@ -208,5 +208,50 @@ namespace EmployeeManagementSystem.Repository
                 return false;
             }
         }
+
+        public async Task<EmployeeAllResponse> GetBySearchText(string text)
+        {
+            var employeeAllResponse = new EmployeeAllResponse
+            {
+                Employees = new List<Employee>()
+            };
+
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    using (var command = new SqlCommand("GetEmployeeBySearch", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Text", text);
+                        
+
+                        await connection.OpenAsync();
+
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                employeeAllResponse.Employees.Add(new Employee
+                                {
+                                    Id = (int)reader["Id"],
+                                    Name = reader["Name"].ToString(),
+                                    Position = reader["Position"].ToString(),
+                                    Department = reader["Department"].ToString(),
+                                    Salary = (decimal)reader["Salary"]
+                                });
+                            }
+                           
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return employeeAllResponse;
+        }
     }
 }
