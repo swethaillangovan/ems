@@ -4,6 +4,13 @@
       <mat-card-actions>
         <button mat-raised-button color="primary" (click)="addEmployee()">Add Employee</button>
       </mat-card-actions>
+      <mat-card-actions>
+        <mat-form-field appearance="fill">
+          <mat-label>Search Employee</mat-label>
+          <input matInput name="search" (onkeypress)="searchEmployee($event)"/>
+          
+        </mat-form-field>
+      </mat-card-actions>
     </mat-card-header>
     <mat-card-content>
       <div class="employee-table-container">

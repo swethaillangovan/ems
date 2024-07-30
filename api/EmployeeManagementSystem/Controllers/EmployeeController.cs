@@ -123,5 +123,18 @@ namespace EmployeeManagementSystem.Controllers
                 return StatusCode(500);
             }
         }
+
+        [HttpGet("{text}")]
+        public async Task<ActionResult<EmployeeAllResponse>> GetEmployeeBySearch(string text)
+        {
+            var employee = await _employeeRepository.GetBySearchText(text).ConfigureAwait(false);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(employee);
+        }
     }
 }

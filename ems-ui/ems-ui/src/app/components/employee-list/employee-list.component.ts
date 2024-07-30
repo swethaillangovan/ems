@@ -13,7 +13,7 @@ export class EmployeeListComponent implements OnInit {
   totalCount: number = 0;
   page: number = 1;
   pageSize: number = 10;
-
+  searchtext:string='';
   constructor(
     private employeeService: EmployeeService,
     private router: Router
@@ -41,5 +41,11 @@ export class EmployeeListComponent implements OnInit {
   }
   addEmployee(): void {
     this.router.navigate(['/employee']);
+  }
+  searchEmployee(event:any): void{
+    this.searchtext = event;
+    this.employeeService.getEmployeesBySearch(this.searchtext).subscribe(response => {
+      this.employees = response.employees;
+    });
   }
 }

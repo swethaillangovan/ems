@@ -32,4 +32,8 @@ export class EmployeeService {
   deleteEmployee(id: number): Observable<boolean> {
     return this.http.delete<boolean>(`${this.apiUrl}/${id}`);
   }
+  getEmployeesBySearch(text:string): Observable<EmployeeAllResponse> {
+    let params = new HttpParams().set('text', text);
+    return this.http.get<EmployeeAllResponse>(this.apiUrl, { params });
+  }
 }
